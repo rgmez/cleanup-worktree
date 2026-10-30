@@ -38,5 +38,6 @@ byte-matching resources for Claude Code, GitHub Copilot, Cursor and Codex into a
 temporary project. No global installation or agent settings were changed.
 
 This does not establish squash-merge hosting integration, managed-host archival,
-simulator management or behavior across every supported agent. Remote discovery
-and hosted CI remain pending until publication.
+simulator management or behavior across every supported agent. Remote discovery,
+complete payload comparison for all four agent IDs, and hosted CI passed on the
+initial public commit. Release packaging is checked separately before tagging.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cleanup Worktree"
+  short_description: "Close merged tasks and retire temporary worktrees"

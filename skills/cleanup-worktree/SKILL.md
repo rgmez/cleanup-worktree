@@ -4,6 +4,7 @@ description: Close a completed Git task after verifying its merge, preserve pend
 license: MIT
 metadata:
   version: "0.1.0"
+  supported-runtimes: "claude-code, github-copilot, cursor, codex, skills.sh"
 ---
 
 # Close a merged task
@@ -94,3 +95,8 @@ claiming success or retrying with a more destructive command.
 Do not claim storage savings from directory-size sums. If space was measured,
 label before/after free-space changes as observations that other activity and
 filesystem snapshots may affect. Retiring a checkout leaves its branch intact.
+
+## Version
+
+0.1.0. Post-merge task closure and eligible temporary-worktree retirement;
+simulator resources remain diagnostic-only.

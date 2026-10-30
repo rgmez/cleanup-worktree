@@ -10,8 +10,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python3 -m pip install -r requirements-dev.txt
       - run: python3 scripts/validate_distribution.py
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: npx --yes markdownlint-cli@0.45.0 '**/*.md'
       - run: python3 scripts/smoke_install.py

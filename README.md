@@ -8,6 +8,18 @@ The skill verifies the exact integrated revision, checks the temporary checkout,
 and uses Git or the host's supported worktree lifecycle when retirement is
 authorized. It leaves branches and unrelated resources in place.
 
+## Repository contents
+
+```text
+skills/cleanup-worktree/     Canonical portable skill, references and license
+skills/cleanup-worktree/agents/  Optional Codex UI metadata
+scripts/                    Package and temporary-installation checks
+docs/                       Validation scenarios and release process
+.github/                    CI, release template and versioned release notes
+CHANGELOG.md                Version history
+CONTRIBUTING.md             Contribution scope and required checks
+```
+
 ## Install
 
 From the project where you want to use it:
@@ -23,9 +35,18 @@ Node.js is required for the installer; the skill's ordinary workflow requires
 local filesystem access and Git on macOS or Linux. Cloud environments do not
 gain access to your Mac by installing it.
 
+The `rgmez/cleanup-worktree@cleanup-worktree` shorthand is also supported. To pin
+the initial release, use:
+
+```sh
+npx skills add https://github.com/rgmez/cleanup-worktree/tree/v0.1.0 --skill cleanup-worktree
+```
+
 ## Example requests
 
 > Check whether this merged task's temporary worktree can be retired. Report only.
+
+For an authorized retirement:
 
 > Retire this task's temporary worktree after verifying the merge. Preserve test
 > evidence and any pending work. Leave its branch intact.
@@ -63,6 +84,16 @@ into a disposable project, with telemetry disabled and all package files compare
 Behavioral validation scenarios are in [docs/validation.md](docs/validation.md).
 Installer checks demonstrate resource packaging, not behavior in every agent.
 An installable GitHub repository does not imply confirmed skills.sh indexing.
+
+## Releases
+
+- Current version: **0.1.0**.
+- [Changelog](CHANGELOG.md).
+- [Release notes](.github/RELEASE_NOTES_0.1.0.md).
+- [Release process](docs/releasing.md) and [release template](.github/RELEASE_TEMPLATE.md).
+- [GitHub Releases](https://github.com/rgmez/cleanup-worktree/releases).
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) before changing the skill's scope or checks.
 
 ## License
 

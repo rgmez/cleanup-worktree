@@ -2,6 +2,8 @@
 import re
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / "skills" / "cleanup-worktree"
 
@@ -10,10 +12,30 @@ def validate():
     errors = []
     source = PACKAGE / "SKILL.md"
     text = source.read_text()
-    if not text.startswith("---\nname: cleanup-worktree\n"):
-        errors.append("Missing canonical frontmatter/name")
-    if 'version: "0.1.0"' not in text or "license: MIT" not in text:
-        errors.append("Missing version or license")
+    parts = text.split("---\n", 2)
+    if len(parts) != 3 or parts[0]:
+        raise SystemExit("Invalid frontmatter boundaries")
+    metadata = yaml.safe_load(parts[1])
+    if metadata.get("name") != PACKAGE.name or metadata.get("license") != "MIT":
+        errors.append("Incorrect canonical name or license")
+    description = metadata.get("description", "")
+    if not isinstance(description, str) or not 1 <= len(description) <= 1024:
+        errors.append("Invalid description")
+    version = metadata.get("metadata", {}).get("version")
+    if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
+        raise SystemExit("Version must be a semantic-version string")
+    if f"## Version\n\n{version}." not in text:
+        errors.append("Body version differs from metadata")
+    if f"Current version: **{version}**" not in (ROOT / "README.md").read_text():
+        errors.append("README version differs from metadata")
+    if f"## [{version}]" not in (ROOT / "CHANGELOG.md").read_text():
+        errors.append("Version has no changelog entry")
+    notes = ROOT / ".github" / f"RELEASE_NOTES_{version}.md"
+    if not notes.is_file():
+        errors.append("Versioned release notes missing")
+    ui = yaml.safe_load((PACKAGE / "agents" / "openai.yaml").read_text())
+    if not 25 <= len(ui["interface"]["short_description"]) <= 64:
+        errors.append("Invalid UI short description length")
     if not (PACKAGE / "LICENSE").is_file():
         errors.append("Package license missing")
     for path in ROOT.rglob("*.md"):
