@@ -14,6 +14,7 @@ authorized. It leaves branches and unrelated resources in place.
 skills/cleanup-worktree/     Canonical portable skill, references and license
 skills/cleanup-worktree/agents/  Optional Codex UI metadata
 scripts/                    Package and temporary-installation checks
+tests/                      Disposable validator regression fixtures
 docs/                       Validation scenarios and release process
 .github/                    CI, release template and versioned release notes
 CHANGELOG.md                Version history
@@ -79,6 +80,8 @@ than removed manually. No force removal, branch deletion or simulator mutation
 is part of the default workflow.
 
 Run `python3 scripts/validate_distribution.py` for packaging and local references.
+Install `requirements-dev.txt` first. Run
+`python3 -B -m unittest discover -s tests -v` for validator regression coverage.
 Run `python3 scripts/smoke_install.py` for pinned CLI discovery and installation
 into a disposable project, with telemetry disabled and all package files compared.
 Behavioral validation scenarios are in [docs/validation.md](docs/validation.md).
@@ -87,9 +90,9 @@ An installable GitHub repository does not imply confirmed skills.sh indexing.
 
 ## Releases
 
-- Current version: **0.1.0**.
+- Current version: **0.1.1**.
 - [Changelog](CHANGELOG.md).
-- [Release notes](.github/RELEASE_NOTES_0.1.0.md).
+- [Release notes](.github/RELEASE_NOTES_0.1.1.md).
 - [Release process](docs/releasing.md) and [release template](.github/RELEASE_TEMPLATE.md).
 - [GitHub Releases](https://github.com/rgmez/cleanup-worktree/releases).
 

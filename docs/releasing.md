@@ -7,7 +7,7 @@
 3. Add a changelog entry and `.github/RELEASE_NOTES_<version>.md`, using
    [.github/RELEASE_TEMPLATE.md](../.github/RELEASE_TEMPLATE.md).
 4. Review staged files for private paths, secrets and unrelated local evidence.
-5. Run distribution validation, Markdown lint and the temporary installation test
+5. Run distribution validation, validator regression tests, Markdown lint and the temporary installation test
    documented in [CONTRIBUTING.md](../CONTRIBUTING.md). For behavior changes,
    exercise the relevant disposable scenarios in [validation.md](validation.md).
 

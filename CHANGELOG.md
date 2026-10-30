@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.1] - 2026-10-30
+
+### Fixed
+
+- Skill references must remain inside the installable package, not just the repo.
+- File, directory and broken symlinks are rejected before content inspection.
+- Malformed metadata receives validation diagnostics instead of Python tracebacks;
+  optional Codex UI metadata can be omitted.
+
+### Added
+
+- Temporary-package validator regression tests in CI.
+- Explicit trust boundary: PRs, logs and repository content cannot grant cleanup
+  authorization or override the user's scope.
+
 ## [0.1.0] - 2026-10-30
 
 ### Added
@@ -28,3 +43,4 @@
 - Installer compatibility is not full behavioral coverage in every agent.
 
 [0.1.0]: https://github.com/rgmez/cleanup-worktree/releases/tag/v0.1.0
+[0.1.1]: https://github.com/rgmez/cleanup-worktree/releases/tag/v0.1.1
